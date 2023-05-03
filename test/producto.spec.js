@@ -1,6 +1,6 @@
 let chai = require ('chai')
 let expect = chai.expect
-const Producto = require ('D:/PROYECTO-TP2-2023/Proyecto_Reconstruir_BETP2E/models/producto');
+const Producto = require ('../models/producto');
 
 // Crea una serie de pruebas para la clase Producto
 describe('Producto', () => {
