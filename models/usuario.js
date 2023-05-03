@@ -1,4 +1,4 @@
-export class Usuario {
+module.exports =  class Usuario {
 
     constructor(nombre, apellido, mail, direccion, telefono){
         this.nombre = nombre;
@@ -6,7 +6,7 @@ export class Usuario {
         this.mail = mail;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.contrasenia = null;
+        this.contrasenia = ' ';
         // this.tipo = null; tipo refiere al tipo de usuario, este puede ser consumidor o proveedor
 
     }
