@@ -37,7 +37,7 @@ describe('Usuario',function(){
         it('Coincide con un String', function(){
             //Establecemos la Password Inicial
             const passwordInicial = persona1.setContrasenia('Mar1253')
-            //Verificamos que corresponda un String
+            //Verificamos que corresponda un
              expect(typeof persona1.contrasenia).to.equal('string')
         })
     })
