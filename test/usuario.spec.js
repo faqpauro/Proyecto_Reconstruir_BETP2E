@@ -1,15 +1,17 @@
+const UsuarioFactory = require('../factories/usuario_factory.js')
+const Consumidor = require ('../models/consumidor.js')
 let chai = require ('chai')
 let expect = chai.expect
-const Usuario = require ('../models/usuario.js')
 
-const persona1 = new Usuario('Marcela','Guzman','Marcela.guzman@gmail.com','Av Cordoba 250', 1154854526)
- const persona2 = new Usuario('Maria','Guzman','Maria.guzman@gmail.com','Av Cordoba 230', 1154854525)
+
+const persona1 =  (new UsuarioFactory).crear("Consumidor").crear('Marcela','Guzman','Marcela.guzman@gmail.com','Callao 250', 1154854526,"352565")
+const persona2 =  (new UsuarioFactory).crear("Consumidor").crear('Maria','Guzman','Maria.guzman@gmail.com', 'Medrano 555', 1154854525,"777777")
 
 describe('Usuario',function(){
-    describe('#contructor', function(){
+    describe('#Constructor', function(){
         it('Correcta Construccion', function(){
             //Verificar que sea una intancia de usuario
-             expect(persona1).to.be.a.instanceOf(Usuario)
+             expect(persona1).to.be.a.instanceOf(Consumidor)
         })
     })
 })
@@ -32,15 +34,6 @@ describe('Usuario',function(){
     })
 })
 
-describe('Usuario',function(){
-    describe('#ValidarPasswordInicial', function(){
-        it('Coincide con un String', function(){
-            //Establecemos la Password Inicial
-            const passwordInicial = persona1.setContrasenia('Mar1253')
-            //Verificamos que corresponda un
-             expect(typeof persona1.contrasenia).to.equal('string')
-        })
-    })
-})
+
 
 
