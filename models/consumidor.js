@@ -1,5 +1,5 @@
-const Usuario = require('../models/usuario.js')
+import {Usuario} from './usuario.js'
 
-module.exports =  class Consumidor extends Usuario {
+export class Consumidor extends Usuario {
     
 }

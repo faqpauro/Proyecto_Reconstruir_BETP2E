@@ -1,6 +1,7 @@
-let chai = require ('chai')
-let expect = chai.expect
-const Comercio = require ('../models/comercio.js')
+import chai from 'chai'
+import {Comercio} from '../models/comercio.js'
+const expect = chai.expect
+
 
 const comercio1 = new Comercio("Construcciones J&G","Articulos de Construccion","1148963254","Av. Del Libertado 2540","construccionesjg@gmail.com")
 

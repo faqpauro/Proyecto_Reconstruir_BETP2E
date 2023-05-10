@@ -1,6 +1,6 @@
-const Servicio = require('../models/servicio');
+import {Servicio} from '../models/servicio'
 
-module.exports = class ServicioFactory{
+export class ServicioFactory{
     static crear(nombre, descripcion, telefono, direccion){
           if (nombre.length < 3 || nombre.length > 50) {
             throw new Error('El nombre debe tener entre 3 y 50 caracteres');

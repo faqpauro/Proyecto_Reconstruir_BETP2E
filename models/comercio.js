@@ -1,4 +1,4 @@
-module.exports = class Comercio {
+export  class Comercio {
     constructor(nombre, descripcion, telefono, direccion, email){
         this.nombre = nombre;
         this.descripcion = descripcion;

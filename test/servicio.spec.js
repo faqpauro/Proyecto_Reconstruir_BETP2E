@@ -1,6 +1,6 @@
-let chai = require ('chai')
-let expect = chai.expect
-const Servicio = require ('../models/servicio');
+import chai from 'chai'
+const expect = chai.expect
+import {Servicio} from '../models/servicio.js'
 
 // Crea una serie de pruebas para la clase Servicio
 describe('Servicio', () => {

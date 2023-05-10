@@ -1,11 +1,12 @@
-const Producto = require('../models/produto.js')
+import {Producto} from '../models/producto.js'
 
-module.exports = class ProductoFactory{
+export class ProductoFactory{
     static crear(nombre, codigo, descripcion, precio, cantidadInicial) {
-        if (!codigo && !precio){
-            throw new Error("El codigo y el precio son obligatorios")
+        if (!codigo || !precio){
+            throw new Error("El codigo o precio es invalido")
         }
         const producto = new Producto(nombre, codigo, descripcion, precio);
+        //SE SETEA LA CANTIDAD PASADA
         producto.setCantidadInicial(cantidadInicial);
         return producto;
     }

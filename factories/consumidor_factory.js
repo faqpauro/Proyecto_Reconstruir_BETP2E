@@ -1,6 +1,6 @@
-const Consumidor = require("../models/consumidor.js")
+import {Consumidor} from '../models/consumidor.js'
 
-module.exports =  class ConsumidorFactory{
+export class ConsumidorFactory{
     constructor(nombre, apellido, mail, telefono, password, tipo){
         this.nombre = nombre;
         this.apellido = apellido;
@@ -12,8 +12,8 @@ module.exports =  class ConsumidorFactory{
 
     //METODO CREACION DE USUARIO CONSUMIDOR
     crear(nombre, apellido, mail, telefono, password,tipo){
-        if(!mail){
-            throw new Error("Mail Invalido")
+        if(!mail || !telefono){
+            throw new Error("Mail o Telefono Invalido")
         }
         return new Consumidor(nombre, apellido, mail, telefono, password,tipo)
     }

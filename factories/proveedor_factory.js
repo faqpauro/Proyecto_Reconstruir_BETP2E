@@ -1,6 +1,6 @@
-const Proveedor = require("../models/proveedor.js")
+import {Proveedor} from '../models/proveedor.js'
 
-module.exports =  class ProveedorFactory{
+export class ProveedorFactory{
     constructor(nombre, apellido, mail, direccion, password,tipo){
         this.nombre = nombre;
         this.apellido = apellido;
@@ -18,3 +18,4 @@ module.exports =  class ProveedorFactory{
         return new Proveedor(nombre, apellido, mail, direccion, password,tipo)
     }
 }
+

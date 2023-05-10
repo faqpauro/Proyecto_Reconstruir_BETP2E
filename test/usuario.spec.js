@@ -1,7 +1,7 @@
-const UsuarioFactory = require('../factories/usuario_factory.js')
-const Consumidor = require ('../models/consumidor.js')
-let chai = require ('chai')
-let expect = chai.expect
+import chai from 'chai'
+const expect = chai.expect
+import {UsuarioFactory} from '../factories/usuario_factory.js'
+import {Consumidor} from '../models/consumidor.js'
 
 
 const persona1 =  (new UsuarioFactory).crear("Consumidor").crear('Marcela','Guzman','Marcela.guzman@gmail.com','Callao 250', 1154854526,"352565")

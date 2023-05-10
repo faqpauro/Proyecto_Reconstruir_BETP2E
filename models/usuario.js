@@ -1,4 +1,4 @@
-module.exports =  class Usuario {
+export class Usuario {
 
     constructor(nombre, apellido, mail, direccion, telefono, password,tipo){
         this.nombre = nombre;
