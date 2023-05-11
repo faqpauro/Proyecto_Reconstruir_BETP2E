@@ -7,12 +7,13 @@ describe('Servicio', () => {
   // Crea una prueba para el contstructor
   describe('#constructor()', () => {
     it('debe crear un objeto Servicio con los valores proporcionados', function() {
-        const servicio = new Servicio('Gasista', 'Instalación y reparación de sistemas de gas', 1566962698, 'Juan B. Justo 2500');
+        const servicio = new Servicio('Gasista', 'Instalación y reparación de sistemas de gas', 1566962698, 'Juan B. Justo 2500', true);
         expect(servicio).to.be.an.instanceOf(Servicio);
         expect(servicio.nombre).to.equal('Gasista');
         expect(servicio.descripcion).to.include('gas');
         expect(servicio.telefono).to.equal(1566962698);
         expect(servicio.direccion).to.equal('Juan B. Justo 2500');
+        expect(servicio.disponibilidad).to.equal(true);
       });
   })  
   // Crea una prueba para el método getDescripcion()
