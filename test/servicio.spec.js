@@ -19,7 +19,7 @@ describe('Servicio', () => {
   // Crea una prueba para el método getDescripcion()
   describe('#getDescripcion', () => {
     it('Debe devolver la descripción del servicio', () => {
-      const servicio2 = new Servicio('Electricista', 'Instalación y reparación de sistemas eléctricos', 1555874588, 'Urquiza 560');
+      const servicio2 = new Servicio('Electricista', 'Instalación y reparación de sistemas eléctricos', 1555874588, 'Urquiza 560', true);
       expect(servicio2.getDescripcion()).to.equal('Instalación y reparación de sistemas eléctricos');
     });
   });
