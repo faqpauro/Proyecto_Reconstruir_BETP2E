@@ -25,6 +25,10 @@ export class Usuario {
     getApellido(){
         return this.apellido;
     }
+
+    setTelefono(telefonoNuevo){
+        this.telelfono = telefonoNuevo;
+    }
     
    
 }
