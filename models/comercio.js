@@ -5,7 +5,6 @@ export  class Comercio {
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
-        this.productos = [];
     }
     getNombre(){
         return this.nombre;
@@ -21,9 +20,6 @@ export  class Comercio {
     }
     getEmail(){
         return this.email;
-    }
-    getProductos(){
-        return this.productos;
     }
 
 }

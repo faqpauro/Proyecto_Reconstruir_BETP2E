@@ -1,17 +1,20 @@
-import {ConsumidorFactory} from'../factories/consumidor_factory.js'
-import {ProveedorFactory} from '../factories/proveedor_factory.js'
+import {Usuario} from '../models/usuario.js'
 
 export class UsuarioFactory{
-    constructor(tipo){
-        this.tipo = tipo;
+    constructor(nombre, apellido, mail,direccion, telefono, password){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.password = password;
     }
-    
-    //CREAR USUARIO DEPENDIENDO DEL TIPO
-    crear(tipo){
-        if(tipo == 'Consumidor'){
-            return new ConsumidorFactory
-        }else{
-            return new ProveedorFactory
+
+    //METODO CREACION DE USUARIO CONSUMIDOR
+    crear(nombre, apellido, mail, direccion, telefono, password){
+        if(!mail || !telefono){
+            throw new Error("Mail o Telefono Invalido")
         }
+        return new Usuario (nombre, apellido, mail, direccion, telefono, password)
     }
 }

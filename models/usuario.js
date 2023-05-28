@@ -1,13 +1,12 @@
 export class Usuario {
 
-    constructor(nombre, apellido, mail, direccion, telefono, password,tipo){
+    constructor(nombre, apellido, mail, direccion, telefono, password){
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.direccion = direccion;
         this.telefono = telefono;
         this.password = password;
-        this.tipo = tipo;
 
     }
     getMail(){

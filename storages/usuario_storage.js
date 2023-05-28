@@ -1,4 +1,4 @@
-export class UsuarioStorage{
+export class UsuarioStorage{ //CORRESPONDE AL ARRAY
     constructor(){
         //EL ALMACENAMIENTO SE REALIZA INICIALMENTE EN UN ARRAY INTERNO
         this.usuarios=[]

@@ -26,12 +26,12 @@ listarUsuarios(){
 }
 
  //BUSCAR USUARIO POR MAIL - RETORNA USUARIO O NULL
-  buscarUsuario(mailNuevo){
+buscarUsuario(mailNuevo){
     return  this.storage.buscarUsuario(mailNuevo)
  }
 
  //ELIMINAR USUARIO ESPECIFICO IDENTIFICADO POR MAIL
-  eliminarUsuario(mailNuevo){
+eliminarUsuario(mailNuevo){
     this.storage.eliminarUsuario(mailNuevo)
 }
 
