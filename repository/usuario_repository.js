@@ -12,8 +12,9 @@ export class UsuarioRepository{
  guardar(usuario){
     //Trae a la persona si existe en bd
     const usuarioBuscado =  this.buscarUsuario(usuario.getMail())
-    //Si la persona no existe se guarda.
-    if( usuarioBuscado == ""){
+    //Si la persona no existe se guarda. 
+    //(!) VERIFICAR QUE LA DEVOLUCION CORRESPONDA A UNDEFINED O NULL
+    if( !usuarioBuscado){
         this.storage.guardar(usuario)
     }else{
         throw new Error("Persona Registrada.")
