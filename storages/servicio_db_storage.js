@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import { Servicio } from '../models/servicio.js';
 
 export class ServicioDBStorage {
   constructor() {
@@ -22,7 +21,14 @@ export class ServicioDBStorage {
 
   async guardar(servicio) {
     try {
-      await this.collection.insertOne(servicio);
+      await this.collection.insertOne({
+        _id: servicio.getId(), // Establecer el valor único del ID si es necesario
+        nombre: servicio.getNombre(),
+        descripcion: servicio.getDescripcion(),
+        telefono: servicio.getTelefono(),
+        direccion: servicio.getDireccion(),
+        disponibilidad: servicio.obtenerDisponibilidad()
+      });
     } catch (error) {
       console.error('Error al guardar el servicio en MongoDB:', error);
     }
