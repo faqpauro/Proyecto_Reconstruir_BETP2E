@@ -11,11 +11,11 @@ export class ComercioStorage{
         return this.comercios;
     }
 
-    buscarComercio(nombre){
-        return this.comercios.find(comercio => comercio.nombre === nombre);
+    buscarComercio(mailNuevo){
+        return this.comercios.find(comercio => comercio.email === mailNuevo);
     }
 
-    eliminarComercio(nombre){
-        this.comercios = this.comercios.filter(comercio => comercio.nombre !== nombre);
+    eliminarComercio(mailNuevo){
+        this.comercios = this.comercios.filter(comercio => comercio.email !== mailNuevo);
     }
 }

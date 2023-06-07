@@ -3,17 +3,17 @@ import { MongoClient } from 'mongodb';
 export class ComercioDBStorage {
   constructor() {
     this.url = "mongodb+srv://rosannyguzman:<54cHLlYx4GZKAb2n>@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority"
-    this.dbName = "Reconstruir TP2"
+    this.dbName = "Reconstruir TP2";
     this.collectionName = 'comercios';
     this.client= new MongoClient(this.url)
     this.connect();
+    this.db = this.client.db(this.dbName);
+    this.collecction = this.db.collection(this.collecctionName);
   }
 
   async connect() {
     try {
       await this.client.connect();
-      this.db = this.client.db(this.dbName);
-      this.collection = this.db.collection(this.collectionName);
     } catch (error) {
       console.error('Error al conectar con MongoDB:', error);
     }
@@ -21,7 +21,13 @@ export class ComercioDBStorage {
 
   async guardar(comercio) {
     try {
-      await this.collection.insertOne(comercio);
+      await this.collecction.insertOne({
+        _id: comercio.getEmail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
+        nombre: comercio.getNombre(),
+        telefono: comercio.getTelefono(),
+        direccion: comercio.getDireccion(),
+        descripcion: comercio.getDescripcion(),
+      });
     } catch (error) {
       console.error('Error al guardar el comercio en MongoDB:', error);
     }
@@ -36,18 +42,18 @@ export class ComercioDBStorage {
     }
   }
 
-  async buscarComercio(nombre) {
+  async buscarComercio(mailNuevo) {
     try {
-      return await this.collection.findOne({ nombre });
+      return await this.collection.find({ _id: mailNuevo }).toArray();;
     } catch (error) {
       console.error('Error al buscar el comercio en MongoDB:', error);
       return null;
     }
   }
 
-  async eliminarComercio(nombre) {
+  async eliminarComercio(mailNuevo) {
     try {
-      await this.collection.deleteOne({ nombre });
+      await this.collecction.deleteOne({ _id: mailNuevo });
     } catch (error) {
       console.error('Error al eliminar el comercio en MongoDB:', error);
     }
