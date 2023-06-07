@@ -26,11 +26,6 @@ eliminarUsuario(mailNuevo){
     return this.usuarios.filter(per => (per.mail !== mailNuevo))
 }
 
-//ACTUALIZAR REGISTRO
-actualizarRegistro(persona){
-    persona.setRegistrado(true)
-}
-
 //MODIFICAMOS DATO DEL USUARIO 
 actualizarTelefono(mail,telefono){
     const usuario1 = this.buscarUsuario(mail)

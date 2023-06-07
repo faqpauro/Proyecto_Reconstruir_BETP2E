@@ -1,10 +1,10 @@
-import {UsuarioStorageFactory} from "../storages/usuario_storage_factory.js"
+import {StorageFactory} from "../storages/storage_factory.js"
 
 export class UsuarioRepository{
     //ALMACENAMIENTO DE DATOS
     //PARAMETRO POR DEFAULT, SI EL MISMO NO ESPECIFICADO TOMARA POR DEFAULT BD
-    constructor(tipo='array'){ 
-        this.storage= new UsuarioStorageFactory(tipo).storage()
+    constructor(tipo='array', modelo='usuario'){ 
+        this.storage= new StorageFactory(tipo,modelo).storage()
     }
 //DESARROLLO DE CRUD
 

@@ -1,9 +1,9 @@
-import {ServicioStorageFactory} from '../storages/servicio_storage_factory'
+import {StorageFactory} from '../storages/storage_factory'
 
 export class ServicioRepository{
 
-    constructor(tipo = 'array'){
-        this.storage = new ServicioStorageFactory(tipo).storage();
+    constructor(tipo = 'array',modelo='servicio'){
+        this.storage = new StorageFactory(tipo,modelo).storage();
     }
 
     guardar(servicio){

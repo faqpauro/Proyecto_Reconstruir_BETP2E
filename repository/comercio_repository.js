@@ -1,10 +1,10 @@
-import {ComercioStorageFactory} from "../storages/comercio_storage_factory.js"
+import {StorageFactory} from "../storages/storage_factory.js"
 
 export class ComercioRepository{
     //ALMACENAMIENTO DE DATOS
     //PARAMETRO POR DEFAULT, SI EL MISMO NO ESPECIFICADO TOMARA POR DEFAULT BD
-    constructor(tipo='array'){ 
-        this.storage= new ComercioStorageFactory(tipo).storage()
+    constructor(tipo='array',modelo='comercio'){ 
+        this.storage= new StorageFactory(tipo,modelo).storage()
     }
 //DESARROLLO DE CRUD
 
