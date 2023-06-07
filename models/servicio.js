@@ -1,12 +1,15 @@
 export class Servicio {
-    constructor(nombre, descripcion, telefono, direccion, disponibilidad){
+    constructor(id, nombre, descripcion, telefono, direccion, disponibilidad){
+        this,id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.telefono = telefono;
         this.direccion = direccion;
         this.disponibilidad = disponibilidad;
     }
-
+    getId(){
+        return this.id;
+    }
     getNombre(){
         return this.nombre;
     }
