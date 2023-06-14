@@ -42,20 +42,34 @@ export class ComercioDBStorage {
     }
   }
 
-  async buscarComercio(mailNuevo) {
+  async buscarComercio(mail) {
     try {
-      return await this.collection.find({ _id: mailNuevo }).toArray();;
+      return await this.collection.find({ _id: mail }).toArray();;
     } catch (error) {
       console.error('Error al buscar el comercio en MongoDB:', error);
       return null;
     }
   }
 
-  async eliminarComercio(mailNuevo) {
+  async eliminarComercio(mail) {
     try {
-      await this.collecction.deleteOne({ _id: mailNuevo });
+      await this.collecction.deleteOne({ _id: mail });
     } catch (error) {
       console.error('Error al eliminar el comercio en MongoDB:', error);
     }
+  }
+
+  //MODIFICAMOS DATO DEL COMERCIO
+  async actualizarTelefono(mail, telefonoNuevo) {
+    this.collecction.updateOne(
+      {
+        _id: mail,
+      },
+      {
+        $set: {
+          telefono: telefonoNuevo,
+        },
+      }
+    );
   }
 }

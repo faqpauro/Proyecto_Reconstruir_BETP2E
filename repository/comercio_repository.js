@@ -25,14 +25,19 @@ listarComercios(){
     return this.storage.listarComercios()
 }
 
- //BUSCAR COMERCIO POR NOMBRE - RETORNA COMERCIO O NULL
-buscarComercio(nombre){
-    return  this.storage.buscarComercio(nombre)
+ //BUSCAR COMERCIO POR MAIL - RETORNA COMERCIO O NULL
+buscarComercio(mail){
+    return  this.storage.buscarComercio(mail)
  }
 
- //ELIMINAR COMERCIO ESPECIFICO IDENTIFICADO POR NOMBRE
-eliminarComercio(nombre){
-    this.storage.eliminarComercio(nombre)
+ //ELIMINAR COMERCIO ESPECIFICO IDENTIFICADO POR MAIL
+eliminarComercio(mail){
+    this.storage.eliminarComercio(mail)
+}
+
+//MODIFICAMOS DATO DEL COMERCIO 
+modificarTelefono(mail,telfNuevo){
+    this.storage.actualizarTelefono(mail,telfNuevo)
 }
 
 }

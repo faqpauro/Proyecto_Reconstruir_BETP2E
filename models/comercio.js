@@ -21,5 +21,8 @@ export  class Comercio {
     getEmail(){
         return this.email;
     }
+    setTelefono(telefonoNuevo){
+        this.telefono = telefonoNuevo;
+    }
 
 }
