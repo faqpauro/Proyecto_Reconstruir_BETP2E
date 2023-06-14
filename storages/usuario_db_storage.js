@@ -4,10 +4,10 @@ export class UsuarioDBStorage {
   constructor() {
     //EN EL CONSTRUCTOR SE ESTABLECE TODO LA NECESARIO PARA HACER LA CONEXION
     this.url =
-      "mongodb+srv://rosannyguzman:<54cHLlYx4GZKAb2n>@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority";
-    this.dbName = "Reconstruir TP2";
+      "mongodb+srv://rosannyguzman:re15Con85truir@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority";
+    this.dbName = 'ReconstruirTP2';
     //Trabajamos sobre la coleccion de Usuarios cargada en MongoDb
-    this.collecctionName = "usuarios";
+    this.collecctionName = "usuario";
     this.client = new MongoClient(this.url);
     this.connect();
     this.db = this.client.db(this.dbName);
