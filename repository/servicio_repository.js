@@ -2,7 +2,7 @@ import {StorageFactory} from '../storages/storage_factory'
 
 export class ServicioRepository{
 
-    constructor(tipo = 'array',modelo='servicio'){
+    constructor(tipo = 'db',modelo='servicio'){
         this.storage = new StorageFactory(tipo,modelo).storage();
     }
 
