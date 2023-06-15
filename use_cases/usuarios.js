@@ -1,7 +1,7 @@
 import { UsuarioFactory } from "../factories/usuario_factory.js";
 import { UsuarioRepository } from "../repository/usuario_repository.js";
 
-class UsuarioUseCase {
+export class UsuarioUseCase {
   async crear(nombre, apellido, mail, direccion, telefono, password) {
     try {
       //CREAMOS EL USUARIO CORRESPONDIENTE VERIFICADO POR EXCEPCION
@@ -49,3 +49,6 @@ class UsuarioUseCase {
   }
 
 }
+
+
+

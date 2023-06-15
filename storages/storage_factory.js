@@ -1,6 +1,10 @@
 import {UsuarioStorage} from "../storages/usuario_storage.js"
 import {ServicioStorage} from "../storages/servicio_storage.js"
 import {ComercioStorage} from "../storages/comercio_storage.js"
+import {UsuarioDBStorage} from "../storages/usuario_db_storage.js"
+import {ServicioDBStorage} from "../storages/servicio_db_storage.js"
+import {ComercioDBStorage} from "../storages/comercio_db_storage.js"
+
 
 export class StorageFactory{
     //ESTA CLASE REPRESENTA LA CONEXION ENTRE USUARIO.REPOSITORY Y LOS STORAGE A USAR
@@ -11,7 +15,7 @@ export class StorageFactory{
     }
 
     storage(){
-        if(this.tipo = 'array'){
+        if(this.tipo == 'array'){
             switch (modelo) {
                 case 'usuario':
                     return new UsuarioStorage
@@ -21,14 +25,14 @@ export class StorageFactory{
                     return new ComercioStorage
             }
         }
-        if(this.tipo = 'db'){
+        if(this.tipo == 'db'){
             switch (modelo) {
                 case 'usuario':
-                    return new UsuarioStorage
+                    return new UsuarioDBStorage
                 case 'servicio':
-                    return new ServicioStorage
+                    return new ServicioDBStorage
                 case 'comercio':
-                    return new ComercioStorage
+                    return new ComercioDBStorage
             }
         }
     }  

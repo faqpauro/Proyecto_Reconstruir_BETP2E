@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+
 //FUNCION: PERMITE EL ALMACENAMIENTO AUTOMATICO DE LOS REGISTROS EN LA NUBE DE MONGODB
 export class UsuarioDBStorage {
   constructor() {

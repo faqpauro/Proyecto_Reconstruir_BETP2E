@@ -1,6 +1,6 @@
 import { UsuarioUseCase } from "../use_cases/usuarios.js";
 
-class UsuarioController {
+export  class UsuarioController {
   constructor() {
     this.usuarioUseCase = new UsuarioUseCase();
   }
@@ -22,10 +22,9 @@ class UsuarioController {
   async listarController(req, res) {
     try {
       const respuesta = await this.usuarioUseCase.listar();
-      res.status(200);
-      res.send("Usuarios Registrados" + respuesta);
+      res.status(200).send("Usuarios Registrados" + respuesta);
     } catch (error) {
-      res.status(500);
+      res.status(500).send("Error al obtener la lista de usuarios.");
     }
   }
 
@@ -37,8 +36,7 @@ class UsuarioController {
         const respuesta = await this.usuarioUseCase.buscar(id);
         res.status(200).json(respuesta)
     }catch(error){
-        res.status(500)
-        res.send("Usuario Inexistente")
+        res.status(500).send("Usuario Inexistente")
     }
   }
 
@@ -51,7 +49,7 @@ class UsuarioController {
       res.status(200).json({ mensaje: "Usuario eliminado correctamente" });
     } catch (error) {
         res.status(500);
-      next(error);
+        next(error);
     }
   }
  
@@ -66,8 +64,9 @@ class UsuarioController {
       res.status(500);
     }
   }
-
-
 }
+
+
+
 
 
