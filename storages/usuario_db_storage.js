@@ -8,15 +8,15 @@ export class UsuarioDBStorage {
       "mongodb+srv://rosannyguzman:re15Con85truir@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority";
     this.dbName = 'ReconstruirTP2';
     //Trabajamos sobre la coleccion de Usuarios cargada en MongoDb
-    this.collecctionName = "usuario";
+    this.collectionName = "usuario";
     this.client = new MongoClient(this.url);
     this.connect();
     this.db = this.client.db(this.dbName);
-    this.collecction = this.db.collection(this.collecctionName);
+    this.collection = this.db.collection(this.collectionName);
   }
 
   //REALIZAMOS CONEXION CON MONGODB
-  async connect() {
+  async connect() {  //PROBADO
     //AL SER UNA FUNCION ASINCRONICA, PARA QUE NO ESTE MARCADO ANEXAMOS PALABRA CLAVE ASYNC A LA FUNCION
     await this.client.connect();
   }
@@ -25,16 +25,16 @@ export class UsuarioDBStorage {
 */
 
   //INSERTAMOS OBJETO USUARIO EN LA COLLECCION DE USUARIOS DE LA BASE.
-  async guardar(usuario) {
+  async guardar(usuario) { //SE DEBE AGREGAR EL NOMBRE EN EL MISMO ORDEN DE PARAMETROS DEL MODELS
     //Metodo insertOne, nos permite insertan un registro a la vez.
     try {
-      await this.collecction.insertOne({
-        _id: persona.getMail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
-        nombre: persona.getNombre(),
-        apellido: persona.getApellido(),
-        telefono: persona.getTelefono(),
-        direccion: persona.getDireccion(),
-        password: persona.getPassword(),
+      await this.collection.insertOne({
+        _id: usuario.getMail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
+        nombre: usuario.getNombre(),
+        apellido: usuario.getApellido(),
+        telefono: usuario.getTelefono(),
+        direccion: usuario.getDireccion(),
+        password: usuario.getPassword(),
       });
     } catch (e) {
       print(e);
@@ -42,24 +42,24 @@ export class UsuarioDBStorage {
   }
 
   //TRAEMOS A LOS USUARIOS DEL REPO https://www.npmjs.com/package/mongodb
-  async listarUsuarios() {
-    return await this.collecction.find({}).toArray();
+  async listarUsuarios() {  //--- METODO PROBADO FUNCIONAL
+    return await this.collection.find({}).toArray();
   }
 
-  //BUSCAMOS USUARIO ESPECIFICA POR MAIL
-  async buscarUsuario(mailNuevo) {
+  //BUSCAMOS USUARIO ESPECIFICA POR MAIL --- METODO PROBADO FUNCIONAL
+  async buscarUsuario(mailNuevo) {  
     //Este metodo permite buscar en el array de elementos por clave identificatoria "mail"
-    return await this.collecction.find({ _id: mailNuevo }).toArray();
+    return await this.collection.find({_id: mailNuevo }).toArray();
   }
 
-  //ELIMINAR USUARIO POR MAIL
+  //ELIMINAR USUARIO POR MAIL --- METODO PROBADO FUNCIONAL
   async eliminarUsuario(mailNuevo) {
-    return await this.collecction.deleteOne({ _id: mailNuevo });
+    return await this.collection.deleteOne({ _id: mailNuevo });
   }
 
-  //MODIFICAMOS DATO DEL USUARIO
+  //MODIFICAMOS DATO DEL USUARIO --- METODO PROBADO FUNCIONAL
   async actualizarTelefono(mailNuevo, telefonoNuevo) {
-    this.collecction.updateOne(
+    await this.collection.updateOne(
       {
         _id: mailNuevo,
       },

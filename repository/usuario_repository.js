@@ -3,7 +3,7 @@ import {StorageFactory} from "../storages/storage_factory.js"
 export class UsuarioRepository{
     //ALMACENAMIENTO DE DATOS
     //PARAMETRO POR DEFAULT, SI EL MISMO NO ESPECIFICADO TOMARA POR DEFAULT BD
-    constructor(tipo='array', modelo='usuario'){ 
+    constructor(tipo='db', modelo='usuario'){ 
         this.storage= new StorageFactory(tipo,modelo).storage()
     }
 //DESARROLLO DE CRUD

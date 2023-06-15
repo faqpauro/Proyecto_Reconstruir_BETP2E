@@ -14,3 +14,4 @@ router.get('/', function(res){
 // Exportar el enrutador para que pueda ser utilizado en otros archivos
 module.exports = router;
 
+
