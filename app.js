@@ -1,8 +1,7 @@
 import express from 'express';
 import createError from 'http-errors';
-
-
-import {usuariosRouter} from './routes/usuarios.js'
+//const {createError} = pkg; 
+import usuariosRouter from './routes/usuarios.js'
 //import comerciosRoutes from './routes/comercios.js';
 //import serviciosRoutes from './routes/servicios.js';
 
