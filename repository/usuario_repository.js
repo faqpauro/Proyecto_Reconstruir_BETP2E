@@ -9,16 +9,22 @@ export class UsuarioRepository{
 //DESARROLLO DE CRUD
 
 //GUARDAMOS A LA  PERSONA EN NUESTRO REPOSITORIO DE ACUERDO AL TIPO RECIBIDO
- guardar(usuario){
+ async guardar(usuario){
     //Trae a la persona si existe en bd
-    const usuarioBuscado =  this.buscarUsuario(usuario.getMail())
+    const usuarioBuscado =  await this.buscarUsuario(usuario.getMail())
     //Si la persona no existe se guarda. 
     //(!) VERIFICAR QUE LA DEVOLUCION CORRESPONDA A UNDEFINED O NULL
-    if( !usuarioBuscado){
+    if (usuarioBuscado.length === 0) {
         this.storage.guardar(usuario)
-    }else{
+    } else {
+        // Procesar los documentos encontrados
         throw new Error("Persona Registrada.")
-    }  
+    }
+    //if( !usuarioBuscado){
+     //   this.storage.guardar(usuario)
+    //}else{
+     //   throw new Error("Persona Registrada.")
+    //}  
 }
 
 //LISTAR USUARIOS DEL REPOSITORIO INDICADO
@@ -34,7 +40,7 @@ buscarUsuario(mailNuevo){
 
  //ELIMINAR USUARIO ESPECIFICO IDENTIFICADO POR MAIL
 eliminarUsuario(mailNuevo){
-    this.storage.eliminarUsuario(mailNuevo)
+    return this.storage.eliminarUsuario(mailNuevo)
 }
 
 //MODIFICAMOS DATO DEL USUARIO 

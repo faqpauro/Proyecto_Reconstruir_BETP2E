@@ -27,7 +27,6 @@ export class UsuarioDBStorage {
   //INSERTAMOS OBJETO USUARIO EN LA COLLECCION DE USUARIOS DE LA BASE.
   async guardar(usuario) { //SE DEBE AGREGAR EL NOMBRE EN EL MISMO ORDEN DE PARAMETROS DEL MODELS
     //Metodo insertOne, nos permite insertan un registro a la vez.
-    try {
       await this.collection.insertOne({
         _id: usuario.getMail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
         nombre: usuario.getNombre(),
@@ -36,9 +35,6 @@ export class UsuarioDBStorage {
         direccion: usuario.getDireccion(),
         password: usuario.getPassword(),
       });
-    } catch (e) {
-      print(e);
-    }
   }
 
   //TRAEMOS A LOS USUARIOS DEL REPO https://www.npmjs.com/package/mongodb
@@ -52,7 +48,7 @@ export class UsuarioDBStorage {
   //BUSCAMOS USUARIO ESPECIFICA POR MAIL --- METODO PROBADO FUNCIONAL
   async buscarUsuario(mailNuevo) {  
     //Este metodo permite buscar en el array de elementos por clave identificatoria "mail"
-    return await this.collection.find({_id: mailNuevo }).toArray();
+    return await this.collection.find({_id: mailNuevo }).toArray();;
   }
 
   //ELIMINAR USUARIO POR MAIL --- METODO PROBADO FUNCIONAL

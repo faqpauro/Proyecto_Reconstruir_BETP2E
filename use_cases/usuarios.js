@@ -8,19 +8,21 @@ export class UsuarioUseCase {
       const usuario = new UsuarioFactory().crear(nombre,apellido,mail,direccion,telefono,password);
 
       //CREAMOS CONST REPOSITORIO Y GUARDAMOS AL USUARIO CREADO
-      const resRespositorio = new UsuarioRepository();
-      await resRespositorio.guardar(usuario);
+      await (new UsuarioRepository().guardar(usuario));
+
+      //await resRespositorio.guardar(usuario);
 
     } catch (e) {
-      console.error("Usuario Invalido");
+      //console.error("Usuario Invalido");
+      next(e);
     }
   }
 
   //LISTAR LOS USUARIOS 
   async listar(){
     console.log("arranca caso uso")
-    const cu = await (new UsuarioRepository().listarUsuarios());
-    return cu;
+    const respuesta = await (new UsuarioRepository().listarUsuarios());
+    return respuesta;
   }
 
   //BUSCAR USUARIO POR MAIL 
@@ -36,8 +38,8 @@ export class UsuarioUseCase {
   async eliminar(id){
     const eliminado = await new UsuarioRepository().eliminarUsuario(id)
 
-    if (eliminado.deleteCount == 0) {
-        throw new Error ("El usuario se eliminó correctamente.");
+    if (eliminado.deletedCount === 0) {
+        throw new Error ("El usuario no pudo ser eliminado.");
         //resultado.result.deletedCount
       } 
   }

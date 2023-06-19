@@ -7,16 +7,17 @@ export default class UsuarioController {
   }
   //CONTROLLER CREAR USUARIO 
   async crearController(req, res, next) {
-    req.body = { nombre, apellido, mail, direccion, telefono, password };
-    const usuario = req.body;
-
-    try {
-      await usuarioUseCase.crear(usuario);
-      res.status(200).json({ mensaje: "Usuario Creado Exitosamente" });
-    } catch (error) {
-      res.status(500);
+    console.log(req.body)
+    //req.body = { nombre, apellido, mail, direccion, telefono, password };
+    //const usuario = JSON.stringify(req.body);
+    try{
+      const { nombre, apellido, mail, direccion, telefono, password } = req.body;
+      await this.usuarioUseCase.crear(nombre, apellido, mail, direccion, telefono, password);
+    } catch(error){
       next(error);
     }
+    //res.status(200).json({ mensaje: "Usuario Creado Exitosamente" });
+    //res.status(500);
   }
 
   //CONTROLLER LISTAR USUARIOS
@@ -30,13 +31,8 @@ export default class UsuarioController {
   //CONTROLLER BUSCAR USUARIO POR MAIL
   async buscarController(req,res){
     const {id} = req.params;
-    
-    try{
-        const respuesta = await this.usuarioUseCase.buscar(id);
-        res.status(200).json(respuesta)
-    }catch(error){
-        res.status(500).send("Usuario Inexistente")
-    }
+    const respuesta = await this.usuarioUseCase.buscar(id);
+    return respuesta;
   }
 
   //CONTROLLER PARA ELIMINAR USUARIO
@@ -45,9 +41,7 @@ export default class UsuarioController {
 
     try {
       await this.usuarioUseCase.eliminar(id);
-      res.status(200).json({ mensaje: "Usuario eliminado correctamente" });
     } catch (error) {
-        res.status(500);
         next(error);
     }
   }

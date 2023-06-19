@@ -24,18 +24,18 @@ router.get('/', async function(req, res){
 //Desarrollo de Metodo GET - Buscar Usuarios
 router.get('/:id', async function(req, res){
     try {
-        await UsuarioController.buscarController(req, res);
-        res.status(200); // Enviar un código de estado 200 (OK) al cliente
+        const respuesta = await usuarioController.buscarController(req, res);
+        res.status(200).json(respuesta); // Enviar un código de estado 200 (OK) al cliente
       } catch (error) {
-        res.sendStatus(500); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+        res.sendStatus(500).send("Usuario Inexistente"); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
       }
 })
 
 // Desarrollo de Método POST - Crear Usuario
 router.post('/', async (req, res, next) => {
     try {
-      await UsuarioController.crearController(req, res);
-      res.sendStatus(200); // Enviar un código de estado 200 (OK) al cliente
+      await usuarioController.crearController(req, res);
+      res.status(200).send("Usuario Creado Exitosamente" ); // Enviar un código de estado 200 (OK) al cliente
     } catch (error) {
       res.sendStatus(500); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
     }
@@ -45,10 +45,10 @@ router.post('/', async (req, res, next) => {
   // Desarrollo de Método DELETE - Eliminar Usuario
   router.delete('/:id', async function(req,res,next){
       try{
-        await UsuarioController.eliminarUsuario(req,res)
-        res.status(200).json({ mensaje: "Usuario eliminado correctamente" })
+        await usuarioController.eliminarUsuario(req,res)
+        res.status(200).send("Usuario eliminado correctamente")
       }catch(e){
-        res.status(500).json({ error: "Error: no se pudo eliminar el usuario" });
+        res.status(500).send("Error: no se pudo eliminar el usuario");
       }
   })
 
