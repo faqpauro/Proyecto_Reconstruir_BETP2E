@@ -3,7 +3,7 @@ import createError from 'http-errors';
 //const {createError} = pkg; 
 import usuariosRouter from './routes/usuarios.js'
 //import comerciosRoutes from './routes/comercios.js';
-//import serviciosRoutes from './routes/servicios.js';
+import serviciosRoutes from './routes/servicios.js';
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // Rutas
 app.use('/usuarios', usuariosRouter);
 //app.use('/comercios', comerciosRoutes);
-//app.use('/servicios', serviciosRoutes);
+app.use('/servicios', serviciosRoutes);
 
 
 // Manejo de errores

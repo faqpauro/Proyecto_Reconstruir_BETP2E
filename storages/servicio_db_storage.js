@@ -2,26 +2,24 @@ import { MongoClient } from 'mongodb';
 
 export class ServicioDBStorage {
   constructor() {
-    this.url = "mongodb+srv://rosannyguzman:<54cHLlYx4GZKAb2n>@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority"
-    this.dbName = "Reconstruir TP2"
-    this.collectionName = 'servicios';
-    this.client= new MongoClient(this.url)
+    //EN EL CONSTRUCTOR SE ESTABLECE TODO LA NECESARIO PARA HACER LA CONEXION
+    this.url =
+      "mongodb+srv://rosannyguzman:re15Con85truir@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority";
+    this.dbName = 'ReconstruirTP2';
+    //Trabajamos sobre la coleccion de Servicios cargada en MongoDb
+    this.collectionName = "servicios";
+    this.client = new MongoClient(this.url);
     this.connect();
+    this.db = this.client.db(this.dbName);
+    this.collection = this.db.collection(this.collectionName);
   }
 
   async connect() {
-    try {
-      await this.client.connect();
-      this.db = this.client.db(this.dbName);
-      this.collection = this.db.collection(this.collectionName);
-    } catch (error) {
-      console.error('Error al conectar con MongoDB:', error);
-    }
+    await this.client.connect();
   }
 
   async guardar(servicio) {
-    try {
-      await this.collection.insertOne({
+        await this.collection.insertOne({
         _id: servicio.getId(), // Establecer el valor único del ID si es necesario
         nombre: servicio.getNombre(),
         descripcion: servicio.getDescripcion(),
@@ -29,34 +27,31 @@ export class ServicioDBStorage {
         direccion: servicio.getDireccion(),
         disponibilidad: servicio.obtenerDisponibilidad()
       });
-    } catch (error) {
-      console.error('Error al guardar el servicio en MongoDB:', error);
-    }
   }
 
   async listarServicios() {
-    try {
-      return await this.collection.find().toArray();
-    } catch (error) {
-      console.error('Error al listar los servicios en MongoDB:', error);
-      return [];
-    }
+    const servicios = await this.collection.find().toArray();
+    return servicios;
   }
 
-  async buscarServicio(nombre) {
-    try {
-      return await this.collection.findOne({ nombre });
-    } catch (error) {
-      console.error('Error al buscar el servicio en MongoDB:', error);
-      return null;
-    }
+  async buscarServicio(id) {
+      return await this.collection.find({ _id: id }).toArray();;
   }
 
-  async eliminarServicio(nombre) {
-    try {
-      await this.collection.deleteOne({ nombre });
-    } catch (error) {
-      console.error('Error al eliminar el servicio en MongoDB:', error);
-    }
+  async eliminarServicio(id) {
+      return await this.collection.deleteOne({ _id: id });
+  }
+
+  async actualizarDescripcion(id, descripcionNueva) {
+    return await this.collection.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          descripcion: descripcionNueva,
+        },
+      }
+    );
   }
 }

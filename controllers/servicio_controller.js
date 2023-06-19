@@ -1,62 +1,55 @@
-import { ServicioUseCase } from "../use_cases/servicios";
+import { ServicioUseCase } from "../use_cases/servicios.js";
 
-class ServicioController {
+export default class ServicioController {
   constructor() {
     this.servicioUseCase = new ServicioUseCase();
   }
 
+  //CONTROLLER CREAR SERVICIO
   async crearController(req, res, next) {
-    const { nombre, descripcion, telefono, direccion, disponibilidad } = req.body;
+    const { id, nombre, descripcion, telefono, direccion } = req.body;
 
-    try {
-      await this.servicioUseCase.crear(nombre, descripcion, telefono, direccion, disponibilidad);
-      res.status(200).json({ mensaje: "Servicio creado exitosamente" });
-    } catch (error) {
-      res.status(500);
-      next(error);
-    }
+    await this.servicioUseCase.crear(id, nombre, descripcion, telefono, direccion);
   }
 
+  //CONTROLLER LISTAR SERVICIOS
   async listarController(req, res) {
-    try {
       const respuesta = await this.servicioUseCase.listar();
-      res.status(200).json(respuesta);
-    } catch (error) {
-      res.status(500);
-    }
+      return respuesta;
   }
 
+  //CONTROLLER BUSCAR SERVICIO POR ID
   async buscarController(req, res) {
-    const { nombre } = req.params;
+    const { id } = req.params;
 
     try {
-      const respuesta = await this.servicioUseCase.buscar(nombre);
-      res.status(200).json(respuesta);
+      const respuesta = await this.servicioUseCase.buscar(id);
+      return respuesta;
     } catch (error) {
-      res.status(500).send("Servicio inexistente");
-    }
-  }
-
-  async eliminarController(req, res, next) {
-    const { nombre } = req.params;
-
-    try {
-      await this.servicioUseCase.eliminar(nombre);
-      res.status(200).json({ mensaje: "Servicio eliminado correctamente" });
-    } catch (error) {
-      res.status(500);
       next(error);
     }
   }
 
-  async modificarController(req, res) {
-    const { nombre, descripcionNueva } = req.params;
+  //CONTROLLER PARA ELIMINAR SERVICIO
+  async eliminarController(req, res, next) {
+    const { id } = req.params;
 
     try {
-      await this.servicioUseCase.modificar(nombre, descripcionNueva);
-      res.status(200).json({ mensaje: "Servicio modificado exitosamente" });
+      await this.servicioUseCase.eliminar(id);
     } catch (error) {
-      res.status(500);
+      next(error);
+    }
+  }
+
+  //CONTROLLER PARA MODIFICAR
+  async modificarController(req, res) {
+    const { id } = req.params;
+    const { descripcion } = req.body;
+
+    try {
+      await this.servicioUseCase.modificar(id, descripcion);
+    } catch (error) {
+      next(error);
     }
   }
 }

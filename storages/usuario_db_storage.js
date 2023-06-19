@@ -45,7 +45,7 @@ export class UsuarioDBStorage {
   async buscarUsuario(mailNuevo) {  
     //Este metodo permite buscar en el array de elementos por clave identificatoria "mail"
     //De ubicarlo retorna el objeto caso contrario Array vacio
-    return await this.collection.find({_id: mailNuevo }).toArray();;
+    return await this.collection.find({_id: mailNuevo }).toArray();
   }
 
   //ELIMINAR USUARIO POR MAIL 

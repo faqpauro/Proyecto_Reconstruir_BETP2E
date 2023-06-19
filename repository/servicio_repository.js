@@ -1,14 +1,14 @@
-import {StorageFactory} from '../storages/storage_factory'
+import {ServicioDBStorage} from "../storages/servicio_db_storage.js"
 
 export class ServicioRepository{
-
-    constructor(tipo = 'db',modelo='servicio'){
-        this.storage = new StorageFactory(tipo,modelo).storage();
+    //ALMACENAMIENTO DE DATOS POR DEFECTO SE HACE USO DE CONEXION CON DBMONGO
+    constructor(){
+        this.storage = new ServicioDBStorage();
     }
 
-    guardar(servicio){
-        const servicioExistente = this.buscarServicio(servicio.getNombre());
-        if(!servicioExistente){
+    async guardar(servicio){
+        const servicioExistente = await this.buscarServicio(servicio.getId());
+        if(servicioExistente.length === 0){
             this.storage.guardar(servicio);
         }else{
             throw new Error("El servicio ya existe.");
@@ -19,11 +19,15 @@ export class ServicioRepository{
         return this.storage.listarServicios();
     }
 
-    buscarServicio(nombre){
-        return this.storage.buscarServicio(nombre);
+    buscarServicio(id){
+        return this.storage.buscarServicio(id);
     }
 
-    eliminarServicio(nombre){
-        this.storage.eliminarServicio(nombre);
+    eliminarServicio(id){
+        return this.storage.eliminarServicio(id);
+    }
+
+    modificarDescripcion(id,descripcionNueva){
+        return this.storage.actualizarDescripcion(id,descripcionNueva)
     }
 }

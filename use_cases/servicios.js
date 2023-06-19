@@ -1,44 +1,44 @@
-import { ServicioFactory } from "../factories/servicio_factory";
-import { ServicioRepository } from "../repository/servicio_repository";
+import { ServicioFactory } from "../factories/servicio_factory.js";
+import { ServicioRepository } from "../repository/servicio_repository.js";
 
-class ServicioUseCase {
-  async crear(nombre, descripcion, telefono, direccion, disponibilidad) {
-    try {
+export class ServicioUseCase {
+
+  async crear(id, nombre, descripcion, telefono, direccion) {
       // Creamos el servicio correspondiente verificado por excepción
-      const servicio = ServicioFactory.crear(nombre, descripcion, telefono, direccion, disponibilidad);
+      const servicio = new ServicioFactory().crear(id, nombre, descripcion, telefono, direccion);
 
       // Creamos el repositorio y guardamos el servicio creado
-      const servicioRepository = new ServicioRepository();
-      await servicioRepository.guardar(servicio);
-
-    } catch (e) {
-      console.error("Servicio inválido");
-    }
+      await new ServicioRepository().guardar(servicio);
   }
 
+  //LISTAR LOS SERVICIOS
   async listar() {
-    await new ServicioRepository().listarServicios();
+    const respuesta = await new ServicioRepository().listarServicios();
+    return respuesta;
   }
 
-  async buscar(nombre) {
-    const servicioBuscado = await new ServicioRepository().buscarServicio(nombre);
-    if (!servicioBuscado) {
+  //BUSCAR SERVICIO POR NOMBRE
+  async buscar(id) {
+    const servicioBuscado = await new ServicioRepository().buscarServicio(id);
+    if (servicioBuscado.length === 0) {
       throw new Error("Servicio no encontrado");
     }
     return servicioBuscado;
   }
 
-  async eliminar(nombre) {
-    const eliminado = await new ServicioRepository().eliminarServicio(nombre);
+  //ELIMINAR SERVICIO
+  async eliminar(id) {
+    const eliminado = await new ServicioRepository().eliminarServicio(id);
 
-    if (eliminado.deleteCount == 0) {
+    if (eliminado.deletedCount === 0) {
       throw new Error("El servicio no se pudo eliminar correctamente.");
     }
   }
 
-  async modificar(nombre, descripcionNueva) {
-    const modificado = await new ServicioRepository().modificarDescripcion(nombre, descripcionNueva);
-    if (modificado.modifiedCount == 0) {
+  //MODIFICAR SERVICIO
+  async modificar(id, descripcionNueva) {
+    const modificado = await new ServicioRepository().modificarDescripcion(id, descripcionNueva);
+    if (modificado.modifiedCount === 0) {
       throw new Error("No se pudo modificar el servicio.");
     }
   }

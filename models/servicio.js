@@ -1,11 +1,11 @@
 export class Servicio {
-    constructor(id, nombre, descripcion, telefono, direccion, disponibilidad){
+    constructor(id, nombre, descripcion, telefono, direccion){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = true;
     }
     getId(){
         return this.id;
@@ -25,9 +25,6 @@ export class Servicio {
     mostrarDescripcion(){
         console.log(this.descripcion);
     }
-
-    agregarProductos(){} // Desarrollo pendiente
-
     obtenerDisponibilidad(){
         return this.disponibilidad;
     }
