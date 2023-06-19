@@ -1,6 +1,6 @@
 export class Servicio {
     constructor(id, nombre, descripcion, telefono, direccion, disponibilidad){
-        this,id = id;
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.telefono = telefono;

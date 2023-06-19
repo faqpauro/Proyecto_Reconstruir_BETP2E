@@ -7,6 +7,7 @@ export class Usuario {
         this.direccion = direccion;
         this.telefono = telefono;
         this.password = password;
+        this.servicios = [];
 
     }
     getMail(){

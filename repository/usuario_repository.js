@@ -39,4 +39,8 @@ eliminarUsuario(mailNuevo){
 modificarTelefono(mail,telfNuevo){
     return this.storage.actualizarTelefono(mail,telfNuevo)
 }
+
+agregarServicio(mail,servicio){
+    return this.storage.actualizarTelefono(mail,telfNuevo)
+}
 }
