@@ -1,8 +1,7 @@
 import {UsuarioDBStorage} from "../storages/usuario_db_storage.js"
 
 export class UsuarioRepository{
-    //ALMACENAMIENTO DE DATOS
-    //PARAMETRO POR DEFAULT, SI EL MISMO NO ESPECIFICADO TOMARA POR DEFAULT BD
+    //ALMACENAMIENTO DE DATOS POR DEFECTO SE HACE USO DE CONEXION CON DBMONGO
     constructor(){ 
         this.storage= new UsuarioDBStorage()
     }
@@ -10,42 +9,34 @@ export class UsuarioRepository{
 
 //GUARDAMOS A LA  PERSONA EN NUESTRO REPOSITORIO DE ACUERDO AL TIPO RECIBIDO
  async guardar(usuario){
-    //Trae a la persona si existe en bd
+    //Busca a la persona en la colleccion de BD
     const usuarioBuscado =  await this.buscarUsuario(usuario.getMail())
-    //Si la persona no existe se guarda. 
-    //(!) VERIFICAR QUE LA DEVOLUCION CORRESPONDA A UNDEFINED O NULL
+    //Si no existe la persona es guardada en la coleccion. 
+    //(length === 0 ) VERIFICA QUE LA DEVOLUCION CORRESPONDE A UN ARRAY VACIO
     if (usuarioBuscado.length === 0) {
         this.storage.guardar(usuario)
     } else {
-        // Procesar los documentos encontrados
         throw new Error("Persona Registrada.")
-    }
-    //if( !usuarioBuscado){
-     //   this.storage.guardar(usuario)
-    //}else{
-     //   throw new Error("Persona Registrada.")
-    //}  
+    }  
 }
 
-//LISTAR USUARIOS DEL REPOSITORIO INDICADO
+//LISTAR USUARIOS DEL REPOSITORIO 
 listarUsuarios(){
-    console.log("arranca repository")
     return this.storage.listarUsuarios()
 }
 
- //BUSCAR USUARIO POR MAIL - RETORNA USUARIO O NULL
+//BUSCAR USUARIO POR MAIL - RETORNA USUARIO O NULL
 buscarUsuario(mailNuevo){
     return  this.storage.buscarUsuario(mailNuevo)
  }
 
- //ELIMINAR USUARIO ESPECIFICO IDENTIFICADO POR MAIL
+//ELIMINAR USUARIO ESPECIFICO IDENTIFICADO POR MAIL
 eliminarUsuario(mailNuevo){
     return this.storage.eliminarUsuario(mailNuevo)
 }
 
 //MODIFICAMOS DATO DEL USUARIO 
 modificarTelefono(mail,telfNuevo){
-    this.storage.actualizarTelefono(mail,telfNuevo)
+    return this.storage.actualizarTelefono(mail,telfNuevo)
 }
-
 }

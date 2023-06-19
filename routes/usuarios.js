@@ -1,20 +1,18 @@
 // Importar el módulo Express
 import express from 'express';
 
-//// Importar el Controlador
+// Importar el Controlador
 import UsuarioController from '../controllers/usuario_controller.js'
 
-// Crear una instancia del enrutador de Express
+// Crear una instancia del enrutador de Express + UsuarioController
 var router = express.Router();
 const usuarioController = new UsuarioController();
 
 //Desarrollamos Metodo GET - Listar Usuarios
 router.get('/', async function(req, res){
     try {
-      console.log("arranca")
         const usuarios = await usuarioController.listarController(req, res); // Llama al controlador para listar usuarios
         console.log(usuarios)
-        console.log("llego bien")
         res.status(200).json(usuarios); // Enviar un código de estado 200 (OK) al cliente
       } catch (error) {
         res.sendStatus(500); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
@@ -50,6 +48,19 @@ router.post('/', async (req, res, next) => {
       }catch(e){
         res.status(500).send("Error: no se pudo eliminar el usuario");
       }
+  })
+
+  //REVISAR
+  //Desarrollo de Metodo PATCH - Modificar Telefono de Usuario
+  router.patch('/:id', async function (req,res,next){
+    try{
+      await usuarioController.modificarController(req,res)
+      res.status(200).send("Telefono modificado correctamente")
+    }catch(e){
+      res.status(500).send("Error: no se pudo modificar el telefono del usuario indicado");
+    }
+
+
   })
 
   export default router

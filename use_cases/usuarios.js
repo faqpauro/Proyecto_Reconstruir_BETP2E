@@ -2,57 +2,53 @@ import { UsuarioFactory } from "../factories/usuario_factory.js";
 import { UsuarioRepository } from "../repository/usuario_repository.js";
 
 export class UsuarioUseCase {
+
   async crear(nombre, apellido, mail, direccion, telefono, password) {
     try {
       //CREAMOS EL USUARIO CORRESPONDIENTE VERIFICADO POR EXCEPCION
       const usuario = new UsuarioFactory().crear(nombre,apellido,mail,direccion,telefono,password);
-
       //CREAMOS CONST REPOSITORIO Y GUARDAMOS AL USUARIO CREADO
-      await (new UsuarioRepository().guardar(usuario));
-
-      //await resRespositorio.guardar(usuario);
-
+      await new UsuarioRepository().guardar(usuario);
     } catch (e) {
-      //console.error("Usuario Invalido");
       next(e);
     }
   }
 
-  //LISTAR LOS USUARIOS 
-  async listar(){
-    console.log("arranca caso uso")
-    const respuesta = await (new UsuarioRepository().listarUsuarios());
+  //LISTAR LOS USUARIOS
+  async listar() {
+    const respuesta = await new UsuarioRepository().listarUsuarios();
     return respuesta;
   }
 
-  //BUSCAR USUARIO POR MAIL 
-  async buscar(id){
-    const usuarioBuscado = await (new UsuarioRepository().buscarUsuario(id))
-    if(!usuarioBuscado){
-        throw new Error ("Usuario no encontrado")
+  //BUSCAR USUARIO POR MAIL
+  async buscar(id) {
+    const usuarioBuscado = await new UsuarioRepository().buscarUsuario(id);
+    if (!usuarioBuscado) {
+      throw new Error("Usuario no encontrado");
     }
-    return usuarioBuscado
+    return usuarioBuscado;
   }
 
   //ELIMINAR  USUARIO
-  async eliminar(id){
-    const eliminado = await new UsuarioRepository().eliminarUsuario(id)
-
+  async eliminar(id) {
+    // Realiza llamada al método eliminarUsuario en la instancia de UsuarioRepository
+    const eliminado = await new UsuarioRepository().eliminarUsuario(id);
+      // Verificar si el usuario fue eliminado correctamente
     if (eliminado.deletedCount === 0) {
-        throw new Error ("El usuario no pudo ser eliminado.");
-        //resultado.result.deletedCount
-      } 
+      // Si el número de elementos eliminados es 0, lanzar un error.
+      throw new Error("El usuario no pudo ser eliminado.");
+    }
   }
 
+  //REVISAR 
   //MODIFICAR USUARIO
-  async modificar(mail, telfNuevo){
-    const modificado = await new UsuarioRepository().modificarTelefono(mail,telfNuevo)
-     if(modificado.modifiedCount == 0){
-        throw new  Error ("No se pudo modificar el telelfono")
-     }
+  async modificar(mail, telfNuevo) {
+    // Realiza llamada al método modificarTelefono en la instancia de UsuarioRepository
+    const modificado = await new UsuarioRepository().modificarTelefono(mail,telfNuevo);
+    // Verificar si el teléfono fue modificado correctamente
+    if (modificado.modifiedCount == 0) {
+      // Si el número de documentos modificados es 0, lanzar un error
+      throw new Error("No se pudo modificar el telelfono");
+    }
   }
-
 }
-
-
-

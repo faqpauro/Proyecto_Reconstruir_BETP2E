@@ -16,16 +16,14 @@ export class UsuarioDBStorage {
   }
 
   //REALIZAMOS CONEXION CON MONGODB
-  async connect() {  //PROBADO
-    //AL SER UNA FUNCION ASINCRONICA, PARA QUE NO ESTE MARCADO ANEXAMOS PALABRA CLAVE ASYNC A LA FUNCION
+  async connect() {  
+  //AL SER UNA FUNCION ASINCRONICA, PARA QUE NO ESTE MARCADO ANEXAMOS PALABRA CLAVE ASYNC A LA FUNCION
     await this.client.connect();
   }
-  /*METODOS DESARROLLADOS EN ESTA CLASE SON OBTENIDOS ESPECIALMENTE DE LA DOCUMENTACION
-    https://www.npmjs.com/package/mongodb
-*/
+ 
 
   //INSERTAMOS OBJETO USUARIO EN LA COLLECCION DE USUARIOS DE LA BASE.
-  async guardar(usuario) { //SE DEBE AGREGAR EL NOMBRE EN EL MISMO ORDEN DE PARAMETROS DEL MODELS
+  async guardar(usuario) { 
     //Metodo insertOne, nos permite insertan un registro a la vez.
       await this.collection.insertOne({
         _id: usuario.getMail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
@@ -37,26 +35,25 @@ export class UsuarioDBStorage {
       });
   }
 
-  //TRAEMOS A LOS USUARIOS DEL REPO https://www.npmjs.com/package/mongodb
-  async listarUsuarios() {  //--- METODO PROBADO FUNCIONAL
-    console.log("arranca storage")
+  //TRAEMOS A LOS USUARIOS DEL REPO 
+  async listarUsuarios() { 
     const usuarios = await this.collection.find({}).toArray();
-    console.log(usuarios)
     return usuarios;
   }
 
-  //BUSCAMOS USUARIO ESPECIFICA POR MAIL --- METODO PROBADO FUNCIONAL
+  //BUSCAMOS USUARIO ESPECIFICA POR MAIL 
   async buscarUsuario(mailNuevo) {  
     //Este metodo permite buscar en el array de elementos por clave identificatoria "mail"
+    //De ubicarlo retorna el objeto caso contrario Array vacio
     return await this.collection.find({_id: mailNuevo }).toArray();;
   }
 
-  //ELIMINAR USUARIO POR MAIL --- METODO PROBADO FUNCIONAL
+  //ELIMINAR USUARIO POR MAIL 
   async eliminarUsuario(mailNuevo) {
     return await this.collection.deleteOne({ _id: mailNuevo });
   }
 
-  //MODIFICAMOS DATO DEL USUARIO --- METODO PROBADO FUNCIONAL
+  //MODIFICAMOS DATO DEL USUARIO 
   async actualizarTelefono(mailNuevo, telefonoNuevo) {
     await this.collection.updateOne(
       {
@@ -70,3 +67,9 @@ export class UsuarioDBStorage {
     );
   }
 }
+
+
+
+ /*METODOS DESARROLLADOS EN ESTA CLASE SON OBTENIDOS ESPECIALMENTE DE LA DOCUMENTACION
+    https://www.npmjs.com/package/mongodb
+*/
