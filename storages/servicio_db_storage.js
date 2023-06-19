@@ -30,8 +30,7 @@ export class ServicioDBStorage {
   }
 
   async listarServicios() {
-    const servicios = await this.collection.find().toArray();
-    return servicios;
+    return await this.collection.find().toArray();
   }
 
   async buscarServicio(id) {

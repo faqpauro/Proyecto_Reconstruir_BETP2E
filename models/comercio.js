@@ -1,10 +1,10 @@
 export  class Comercio {
-    constructor(nombre, descripcion, telefono, direccion, email){
+    constructor(nombre, descripcion, telefono, direccion, mail){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.email = email;
+        this.mail = mail;
     }
     getNombre(){
         return this.nombre;
@@ -18,8 +18,8 @@ export  class Comercio {
     getDireccion(){
         return this.direccion;
     }
-    getEmail(){
-        return this.email;
+    getMail(){
+        return this.mail;
     }
     setTelefono(telefonoNuevo){
         this.telefono = telefonoNuevo;

@@ -1,69 +1,55 @@
 import { ComercioUseCase } from "../use_cases/comercios.js";
 
-class ComercioController {
+export default class ComercioController {
   constructor() {
     this.comercioUseCase = new ComercioUseCase();
   }
+
   //CONTROLLER CREAR COMERCIO 
   async crearController(req, res, next) {
-    req.body = { nombre, descripcion, telefono, direccion, email };
-    const comercio = req.body;
-
-    try {
-      await comercioUseCase.crear(comercio);
-      res.status(200).json({ mensaje: "Comercio Creado Exitosamente" });
-    } catch (error) {
-      res.status(500);
-      next(error);
-    }
+    const { nombre, descripcion, telefono, direccion, mail } = req.body;
+    
+    await this.comercioUseCase.crear(nombre, descripcion, telefono, direccion, mail);
   }
 
   //CONTROLLER LISTAR COMERCIOS
   async listarController(req, res) {
-    try {
-      const respuesta = await this.comercioUseCase.listar();
-      res.status(200);
-      res.send("Comercios Registrados" + respuesta);
-    } catch (error) {
-      res.status(500);
-    }
+    const respuesta = await this.comercioUseCase.listar();
+    return respuesta;
   }
 
   //CONTROLLER BUSCAR COMERCIO POR MAIL
   async buscarController(req,res){
-    const {mail} = req.params;
+    const {id} = req.params;
     
     try{
-        const respuesta = await this.comercioUseCase.buscar(mail);
-        res.status(200).json(respuesta)
+        const respuesta = await this.comercioUseCase.buscar(id);
+        return respuesta
     }catch(error){
-        res.status(500)
-        res.send("Comercio Inexistente")
+        next(error);
     }
   }
 
   //CONTROLLER PARA ELIMINAR COMERCIO
-  async eliminarUsuario(req, res, next) {
-    const { mail } = req.params;
+  async eliminarController(req, res, next) {
+    const { id } = req.params;
 
     try {
-      await this.comercioUseCase.eliminar(mail);
-      res.status(200).json({ mensaje: "Comercio eliminado correctamente" });
+      await this.comercioUseCase.eliminar(id);
     } catch (error) {
-        res.status(500);
       next(error);
     }
   }
  
   //CONTROLLER PARA MODIFICAR COMERCIO
   async modificarController(req, res) {
-    const { mail, telefono} = req.params;
+    const { id } = req.params;
+    const { telefono } = req.body;
 
     try {
-      await this.comercioUseCase.modificar(mail, telefono);
-      res.status(200).json({ mensaje: "Comercio modificado exitosamente" });
+      await this.comercioUseCase.modificar(id, telefono);
     } catch (error) {
-      res.status(500);
+      next(error);
     }
   }
 

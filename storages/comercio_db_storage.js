@@ -2,66 +2,47 @@ import { MongoClient } from 'mongodb';
 
 export class ComercioDBStorage {
   constructor() {
-    this.url = "mongodb+srv://rosannyguzman:<54cHLlYx4GZKAb2n>@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority"
-    this.dbName = "Reconstruir TP2";
-    this.collectionName = 'comercios';
-    this.client= new MongoClient(this.url)
+    //EN EL CONSTRUCTOR SE ESTABLECE TODO LA NECESARIO PARA HACER LA CONEXION
+    this.url =
+      "mongodb+srv://rosannyguzman:re15Con85truir@cluster0.yuyibt9.mongodb.net/?retryWrites=true&w=majority";
+    this.dbName = 'ReconstruirTP2';
+    //Trabajamos sobre la coleccion de Servicios cargada en MongoDb
+    this.collectionName = "comercios";
+    this.client = new MongoClient(this.url);
     this.connect();
     this.db = this.client.db(this.dbName);
-    this.collecction = this.db.collection(this.collecctionName);
+    this.collection = this.db.collection(this.collectionName);
   }
 
   async connect() {
-    try {
-      await this.client.connect();
-    } catch (error) {
-      console.error('Error al conectar con MongoDB:', error);
-    }
+    await this.client.connect();
   }
 
   async guardar(comercio) {
-    try {
-      await this.collecction.insertOne({
-        _id: comercio.getEmail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
+    await this.collection.insertOne({
+        _id: comercio.getMail(), //SE ESTABLECE COMO VALOR UNICO ID = MAIL
         nombre: comercio.getNombre(),
         telefono: comercio.getTelefono(),
         direccion: comercio.getDireccion(),
         descripcion: comercio.getDescripcion(),
       });
-    } catch (error) {
-      console.error('Error al guardar el comercio en MongoDB:', error);
-    }
   }
 
   async listarComercios() {
-    try {
       return await this.collection.find().toArray();
-    } catch (error) {
-      console.error('Error al listar los comercios en MongoDB:', error);
-      return [];
-    }
   }
 
   async buscarComercio(mail) {
-    try {
-      return await this.collection.find({ _id: mail }).toArray();;
-    } catch (error) {
-      console.error('Error al buscar el comercio en MongoDB:', error);
-      return null;
-    }
+    return await this.collection.find({ _id: mail }).toArray();
   }
 
   async eliminarComercio(mail) {
-    try {
-      await this.collecction.deleteOne({ _id: mail });
-    } catch (error) {
-      console.error('Error al eliminar el comercio en MongoDB:', error);
-    }
+    return await this.collection.deleteOne({ _id: mail });
   }
 
   //MODIFICAMOS DATO DEL COMERCIO
   async actualizarTelefono(mail, telefonoNuevo) {
-    this.collecction.updateOne(
+    return await this.collection.updateOne(
       {
         _id: mail,
       },
