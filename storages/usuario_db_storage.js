@@ -43,7 +43,10 @@ export class UsuarioDBStorage {
 
   //TRAEMOS A LOS USUARIOS DEL REPO https://www.npmjs.com/package/mongodb
   async listarUsuarios() {  //--- METODO PROBADO FUNCIONAL
-    return await this.collection.find({}).toArray();
+    console.log("arranca storage")
+    const usuarios = await this.collection.find({}).toArray();
+    console.log(usuarios)
+    return usuarios;
   }
 
   //BUSCAMOS USUARIO ESPECIFICA POR MAIL --- METODO PROBADO FUNCIONAL

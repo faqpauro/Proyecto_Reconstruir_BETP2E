@@ -18,7 +18,9 @@ export class UsuarioUseCase {
 
   //LISTAR LOS USUARIOS 
   async listar(){
-    await (new UsuarioRepository().listarUsuarios())
+    console.log("arranca caso uso")
+    const cu = await (new UsuarioRepository().listarUsuarios());
+    return cu;
   }
 
   //BUSCAR USUARIO POR MAIL 

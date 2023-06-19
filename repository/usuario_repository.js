@@ -1,10 +1,10 @@
-import {StorageFactory} from "../storages/storage_factory.js"
+import {UsuarioDBStorage} from "../storages/usuario_db_storage.js"
 
 export class UsuarioRepository{
     //ALMACENAMIENTO DE DATOS
     //PARAMETRO POR DEFAULT, SI EL MISMO NO ESPECIFICADO TOMARA POR DEFAULT BD
-    constructor(tipo='db', modelo='usuario'){ 
-        this.storage= new StorageFactory(tipo,modelo).storage()
+    constructor(){ 
+        this.storage= new UsuarioDBStorage()
     }
 //DESARROLLO DE CRUD
 
@@ -23,6 +23,7 @@ export class UsuarioRepository{
 
 //LISTAR USUARIOS DEL REPOSITORIO INDICADO
 listarUsuarios(){
+    console.log("arranca repository")
     return this.storage.listarUsuarios()
 }
 

@@ -1,7 +1,8 @@
 import { UsuarioUseCase } from "../use_cases/usuarios.js";
 
-export  class UsuarioController {
+export default class UsuarioController {
   constructor() {
+    console.log("constructor controller")
     this.usuarioUseCase = new UsuarioUseCase();
   }
   //CONTROLLER CREAR USUARIO 
@@ -20,12 +21,10 @@ export  class UsuarioController {
 
   //CONTROLLER LISTAR USUARIOS
   async listarController(req, res) {
-    try {
+      console.log("arranca controller")
       const respuesta = await this.usuarioUseCase.listar();
-      res.status(200).send("Usuarios Registrados" + respuesta);
-    } catch (error) {
-      res.status(500).send("Error al obtener la lista de usuarios.");
-    }
+      console.log("termina controller")
+      return respuesta;
   }
 
   //CONTROLLER BUSCAR USUARIO POR MAIL

@@ -1,4 +1,4 @@
-import {UsuarioStorage} from "../storages/usuario_storage.js"
+/*import {UsuarioStorage} from "../storages/usuario_storage.js"
 import {ServicioStorage} from "../storages/servicio_storage.js"
 import {ComercioStorage} from "../storages/comercio_storage.js"
 import {UsuarioDBStorage} from "../storages/usuario_db_storage.js"
@@ -36,4 +36,4 @@ export class StorageFactory{
             }
         }
     }  
-}
+}*/

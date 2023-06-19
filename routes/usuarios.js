@@ -2,16 +2,20 @@
 import express from 'express';
 
 //// Importar el Controlador
-import {UsuarioController} from '../controllers/usuario_controller.js'
+import UsuarioController from '../controllers/usuario_controller.js'
 
 // Crear una instancia del enrutador de Express
 var router = express.Router();
+const usuarioController = new UsuarioController();
 
 //Desarrollamos Metodo GET - Listar Usuarios
 router.get('/', async function(req, res){
     try {
-        await UsuarioController.listarController(req, res); // Llama al controlador para listar usuarios
-        res.sendStatus(200); // Enviar un código de estado 200 (OK) al cliente
+      console.log("arranca")
+        const usuarios = await usuarioController.listarController(req, res); // Llama al controlador para listar usuarios
+        console.log(usuarios)
+        console.log("llego bien")
+        res.status(200).json(usuarios); // Enviar un código de estado 200 (OK) al cliente
       } catch (error) {
         res.sendStatus(500); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
       }
