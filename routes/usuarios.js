@@ -25,7 +25,7 @@ router.get('/:id', async function(req, res){
         const respuesta = await usuarioController.buscarController(req, res);
         res.status(200).json(respuesta); // Enviar un código de estado 200 (OK) al cliente
       } catch (error) {
-        res.sendStatus(500).send("Usuario Inexistente"); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+        res.status(500).send("Usuario Inexistente"); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
       }
 })
 
@@ -50,7 +50,6 @@ router.post('/', async (req, res, next) => {
       }
   })
 
-  //REVISAR
   //Desarrollo de Metodo PATCH - Modificar Telefono de Usuario
   router.patch('/:id', async function (req,res,next){
     try{

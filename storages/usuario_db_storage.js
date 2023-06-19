@@ -55,7 +55,7 @@ export class UsuarioDBStorage {
 
   //MODIFICAMOS DATO DEL USUARIO 
   async actualizarTelefono(mailNuevo, telefonoNuevo) {
-    await this.collection.updateOne(
+    return await this.collection.updateOne(
       {
         _id: mailNuevo,
       },

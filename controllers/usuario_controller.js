@@ -25,9 +25,14 @@ export default class UsuarioController {
 
   //CONTROLLER BUSCAR USUARIO POR MAIL
   async buscarController(req, res) {
-    const { id } = req.params;
-    const respuesta = await this.usuarioUseCase.buscar(id);
-    return respuesta;
+    try{
+      const { id } = req.params;
+      const respuesta = await this.usuarioUseCase.buscar(id);
+      return respuesta;
+    } catch (error){
+      next(error);
+    }
+    
   }
 
   //CONTROLLER PARA ELIMINAR USUARIO
@@ -40,7 +45,7 @@ export default class UsuarioController {
       next(error);
     }
   }
-//REVISAR
+
   //CONTROLLER PARA MODIFICAR
   async modificarController(req, res) {
     const { id } = req.params;

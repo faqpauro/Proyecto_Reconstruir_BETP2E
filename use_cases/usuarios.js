@@ -23,7 +23,7 @@ export class UsuarioUseCase {
   //BUSCAR USUARIO POR MAIL
   async buscar(id) {
     const usuarioBuscado = await new UsuarioRepository().buscarUsuario(id);
-    if (!usuarioBuscado) {
+    if (usuarioBuscado.length === 0) {
       throw new Error("Usuario no encontrado");
     }
     return usuarioBuscado;
@@ -46,7 +46,7 @@ export class UsuarioUseCase {
     // Realiza llamada al método modificarTelefono en la instancia de UsuarioRepository
     const modificado = await new UsuarioRepository().modificarTelefono(mail,telfNuevo);
     // Verificar si el teléfono fue modificado correctamente
-    if (modificado.modifiedCount == 0) {
+    if (modificado.modifiedCount === 0) {
       // Si el número de documentos modificados es 0, lanzar un error
       throw new Error("No se pudo modificar el telelfono");
     }
