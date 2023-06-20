@@ -26,8 +26,8 @@ listarUsuarios(){
 }
 
 //BUSCAR USUARIO POR MAIL - RETORNA USUARIO O NULL
-buscarUsuario(mailNuevo){
-    return  this.storage.buscarUsuario(mailNuevo)
+async buscarUsuario(mailNuevo){
+    return await this.storage.buscarUsuario(mailNuevo)
  }
 
 //ELIMINAR USUARIO ESPECIFICO IDENTIFICADO POR MAIL

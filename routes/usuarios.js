@@ -61,14 +61,24 @@ router.patch('/:id', async function (req, res, next) {
 })
 
 //CAMBIO
-router.post('/', async (req, res, next) => {
+router.patch('/', async (req, res, next) => {
   try {
     await usuarioController.contratarServicio(req, res);
     res.status(200).send("Servicio agregado Exitosamente");
   } catch (error) {
-    res.sendStatus(500);
+    res.status(500).send("" + error);
   }
 });
+
+//Desarrollo de Metodo GET - Listar Servicios de Usuario
+router.get('/carrito/:id', async function (req, res) {
+  try {
+    const respuesta = await usuarioController.serviciosContratados(req, res);
+    res.status(200).json(respuesta); // Enviar un código de estado 200 (OK) al cliente
+  } catch (error) {
+    res.status(500).send("" + error); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+  }
+})
 
 
 

@@ -34,7 +34,7 @@ export class ServicioDBStorage {
   }
 
   async buscarServicio(id) {
-      return await this.collection.find({ _id: id }).toArray();;
+      return await this.collection.find({ _id: id }).toArray();
   }
 
   async eliminarServicio(id) {

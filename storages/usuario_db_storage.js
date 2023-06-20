@@ -69,13 +69,13 @@ export class UsuarioDBStorage {
   }
   //CAMBIO
   async contratarServicio(usuario, servicio) {
-    const mailBuscado = usuario.getMail()
+    const mailBuscado = usuario[0]._id
 
     const result = await this.collection.updateOne(
       { _id: mailBuscado }, // Filtro para encontrar el usuario por el correo
       {
         $push:
-          { Servicios: servicio }
+          { servicios: servicio }
       } // Operador $push para agregar el servicio al array
     );
 

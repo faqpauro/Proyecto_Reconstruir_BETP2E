@@ -9,22 +9,26 @@ export class Contratar {
   }
 
   async contratarServicio(mail, id) {
-    const servicio = this.servicioRepo.buscarServicio(id);
-    const usuario = this.usuarioRepo.buscarUsuario(mail);
-    const result = false 
-
+    const servicioArray = await this.servicioRepo.buscarServicio(id);
+    const servicio = servicioArray[0];
+    const usuario = await this.usuarioRepo.buscarUsuario(mail);
+    
 
     if (usuario.length !== 0) {
-      if (servicio.length !== 0) {
-        result = await this.usuarioRepo.contratarServicio(usuario, servicio);
+      const serviciosUsuario = usuario[0].servicios;
+      const servicioEncontrado = serviciosUsuario.find((e) => e._id === id);
+      if (servicioArray.length !== 0) {
+        if (!servicioEncontrado) {
+          return await this.usuarioRepo.contratarServicio(usuario, servicio);
+        } else {
+          throw Error("El servicio ya está contratado.")
+        }
       } else {
-        console.log("Servicio Inexistente");
+        throw Error("Servicio Inexistente")
       }
     } else {
-      console.log("Usuario Inexistente");
+      throw Error("Usuario Inexistente")
     }
-    return result
   }
   
 }
-

@@ -19,8 +19,8 @@ export class ServicioRepository{
         return this.storage.listarServicios();
     }
 
-    buscarServicio(id){
-        return this.storage.buscarServicio(id);
+    async buscarServicio(id){
+        return await this.storage.buscarServicio(id);
     }
 
     eliminarServicio(id){
