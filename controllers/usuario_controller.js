@@ -56,4 +56,16 @@ export default class UsuarioController {
       next(error);
     }
   }
+
+  //CAMBIO
+  async contratarServicio(req, res) {
+    const { mail,id } = req.params;
+    
+    try {
+      await this.usuarioUseCase.contratarServicio(mail, id);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }

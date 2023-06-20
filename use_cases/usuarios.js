@@ -1,5 +1,6 @@
 import { UsuarioFactory } from "../factories/usuario_factory.js";
 import { UsuarioRepository } from "../repository/usuario_repository.js";
+import {Contratar} from '../command/contratar.js'
 
 export class UsuarioUseCase {
 
@@ -40,7 +41,7 @@ export class UsuarioUseCase {
     }
   }
 
-  //REVISAR 
+  
   //MODIFICAR USUARIO
   async modificar(mail, telfNuevo) {
     // Realiza llamada al método modificarTelefono en la instancia de UsuarioRepository
@@ -52,5 +53,14 @@ export class UsuarioUseCase {
     }
   }
 
+  //CAMBIO
+  async contratarServicio(mail,id){
+
+    const servicio = await new Contratar().contratarServicio(mail,id);
+    //SI EL SERVICIO no FUE INSERTADO
+     if (!servicio.acknowledged) {
+      throw new Error("No se pudo insertar el servicio");
+    }
+}
   
 }

@@ -33,6 +33,10 @@ export class Usuario {
     setTelefono(telefonoNuevo){
         this.telelfono = telefonoNuevo;
     }
+    //cambio
+    getServicios(){
+        return this.servicios;
+    }
     
    
 }

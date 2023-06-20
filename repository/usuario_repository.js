@@ -43,4 +43,11 @@ modificarTelefono(mail,telfNuevo){
 agregarServicio(mail,servicio){
     return this.storage.actualizarTelefono(mail,telfNuevo)
 }
+//CAMBIOS
+async contratarServicio(usuario, servicio){
+    return await this.storage.contratarServicio(usuario, servicio)
+    
+
+}
+
 }
