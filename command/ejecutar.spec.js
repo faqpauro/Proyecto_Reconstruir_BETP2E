@@ -6,28 +6,83 @@ PENDIENTE:
     2.- DESARROLLAR RESPECTIVOS ACCIONARES EN COMMANDS
     3.- POLITICAS - LIMITACIONES - [DIAGRAMA DE FLUJO POR FUNCIONALIDADES]
 */
+/*
+export class Contratar {
+    constructor(){
 
+    }
 // USUARIO: CONTRATAR SERVICIO
 // const usurioRepo = new UsuarioRepository();
 // const servicioRepo = new ComercioRepository();
 
-/*METODO = COMMAND
+//METODO = COMMAND - METODO (4)
 
-contratarServicio(mail,id){
-const servicio = this.servicioRepo().buscarServicio(id)
-const usuario = this.usuarioRepo().buscarUsuario(mail)
+    contratarServicio(mail,id){
+    const servicio = this.servicioRepo().buscarServicio(id)
+    const usuario = this.usuarioRepo().buscarUsuario(mail)
+            
+            if(usuario.length !== 0){
+                if(servicio.length !== 0){
+                    if(existeServicio.lenght === 0){
+                        usurioRepo.contratarServicio(usuario, servicio)
+                }else{
+                    console.log("Servicio Inexistente")
+                }
+            }else{
+                console.log("Usuario Inexistente")
+                }
+            }
 
-if(usuario.length !== 0){
-    if(servicio.length !== 0){
-        if(existeServicio.lenght === 0){
-            usuario.contratarServicio(servicio)
-    }else{
-        console.log("Servicio Inexistente")
     }
-}else{
-    console.log("Usuario Inexistente")
 }
+
+  *** METODO = ROUTER - USUARIO ***    METODO (1)
+router.post('/', async (req, res, next) => {
+    try {
+      await usuarioController.contratarServicio(req, res);
+      res.status(200).send("Servicio agregado Exitosamente" );
+    } catch (error) {
+      res.sendStatus(500); 
+    }
+  });
+
+  *** METODO = USUARIO CONTROLLER ***    METODO (2)
+  async contratarServicio(req, res) {
+    const { mail,id } = req.params;
+    
+    try {
+      await this.usuarioUseCase.contratarServicio(mail, id);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  *** METODO = USUARIO USE CASES *** METODO (3)
+async contratarServicio(mail,id){
+
+    const servicio = await new Contratar().contratarServicio(mail,id);
+    //SI EL SERVICIO no FUE INSERTADO
+     if (!servicio.acknowledged) {
+      throw new Error("No se pudo insertar el servicio");
+    }
 }
+
+*** METODO = REPOSITORIO DE USUARIO *** - METODO (5)
+async contratarServicio(mail, servicio){
+   return  this.storage.contratarServicio(mail, servicio)
+    }  
+}
+
+*** METODO = DB STORAGE DE USUARIO *** - METODO (6)
+asyn contratarServicio(mail1,servicio){
+     const result = await this.collection.updateOne(
+    { _id: mail1 }, // Filtro para encontrar el usuario por el correo
+    { $push: { Servicios: servicio } } // Operador $push para agregar el servicio al array
+  );
+  return result
+}
+
+
 
 *** METODO = REPOSITORIO DE SERVICIO ***
 // DESARROLLADO BUSCAR SERVICIO POR ID
@@ -35,32 +90,16 @@ if(usuario.length !== 0){
 *** METODO = REPOSITORIO DE USUARIO ***
 // DESARROLLADO BUSCAR USUARIO POR MAIL
 
-*** METODO = REPOSITORIO DE USUARIO ***
-async contratarServicio(servicio){
-    this.storage.contratarServicio(servicio)
-    }  
-}
 
-*** METODO = DB STORAGE DE USUARIO ***
-asyn contratarServicio(servicio){
-    await this.servicios.insertOne({
-        _id: id
-        nombre: servicio.getNombre(),
-        descripcion: servicio.getDescripcion(),
-        telefono: servicio.getTelefono(),
-        direccion: servicio.getDireccion(),
-        disponibilidad: servicio.getDisponibilidad(),
-      });
-}
 
-*** METODO = CASOS DE USOS ***
-async contratarServicio(mail,id){
-    const servicio = await new UsuarioRepository().contratarServicio(mail,id);
-    //SI EL SERVICIO no FUE INSERTADO
-     if (!servicio.acknowledged) {
-      throw new Error("No se pudo insertar el servicio");
-    }
-}
+
+
+
+
+
+
+
+
 
 */
 
