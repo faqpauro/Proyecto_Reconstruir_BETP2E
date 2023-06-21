@@ -39,10 +39,11 @@ eliminarUsuario(mailNuevo){
 modificarTelefono(mail,telfNuevo){
     return this.storage.actualizarTelefono(mail,telfNuevo)
 }
-
+/*
 agregarServicio(mail,servicio){
     return this.storage.actualizarTelefono(mail,telfNuevo)
-}
+}*/
+
 //CAMBIOS
 async contratarServicio(usuario, servicio){
     return await this.storage.contratarServicio(usuario, servicio)
