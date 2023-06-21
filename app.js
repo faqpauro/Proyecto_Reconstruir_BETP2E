@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import usuariosRouter from './routes/usuarios.js'
 import comerciosRoutes from './routes/comercios.js';
 import serviciosRoutes from './routes/servicios.js';
+import inicioRoutes from './routes/index.js'
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Rutas
+app.use('/', inicioRoutes )
 app.use('/usuarios', usuariosRouter);
 app.use('/comercios', comerciosRoutes);
 app.use('/servicios', serviciosRoutes);

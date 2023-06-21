@@ -6,12 +6,12 @@ var router = express.Router();
 
 /* GET home page. */
 // Definir una ruta GET para la página de inicio
-router.get('/', function(res){
-  // Renderizar la vista 'index' y pasar el objeto de datos { title: 'Express' }
-  res.render('index', { title: 'Express' });
+router.get('/', function(req,res){
+    // Renderizar la vista 'index' y pasar el objeto de datos { title: 'Express' }
+    res.render('index', { title: 'Express' });
 });
 
 // Exportar el enrutador para que pueda ser utilizado en otros archivos
-module.exports = router;
+export default router;
 
 

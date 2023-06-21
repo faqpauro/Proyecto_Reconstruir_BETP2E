@@ -14,7 +14,7 @@ router.get('/', async function(req, res){
       const comercios = await comercioController.listarController(req, res); // Llama al controlador para listar comercios
       res.status(200).json(comercios); // Enviar un código de estado 200 (OK) al cliente
     } catch (error) {
-      res.sendStatus(500); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+      res.sendStatus(404); 
     }
 })
 
@@ -24,7 +24,7 @@ router.get('/:id', async function(req, res){
       const respuesta = await comercioController.buscarController(req, res);
       res.status(200).json(respuesta); // Enviar un código de estado 200 (OK) al cliente
     } catch (error) {
-      res.status(500).send("Comercio Inexistente"); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+      res.status(404).send("Comercio Inexistente");
     }
 })
 
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     await comercioController.crearController(req, res);
     res.status(200).send("Comercio Creado Exitosamente" ); // Enviar un código de estado 200 (OK) al cliente
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+    res.status(404).json({ error: error.message });
   }
 });
 
@@ -44,7 +44,7 @@ router.delete('/:id', async function(req,res,next){
     await comercioController.eliminarController(req,res)
     res.status(200).send("Comercio eliminado correctamente")
   }catch(e){
-    res.status(500).send("Error: no se pudo eliminar el comercio");
+    res.status(404).send("Error: no se pudo eliminar el comercio");
   }
 })
 
@@ -54,7 +54,7 @@ router.patch('/:id', async function (req,res,next){
     await comercioController.modificarController(req,res)
     res.status(200).send("Teléfono modificada correctamente")
   }catch(e){
-    res.status(500).send("Error: no se pudo modificar el teléfono del comercio indicado");
+    res.status(404).send("Error: no se pudo modificar el teléfono del comercio indicado");
   }
 
 
