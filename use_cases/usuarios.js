@@ -2,6 +2,7 @@ import { UsuarioFactory } from "../factories/usuario_factory.js";
 import { UsuarioRepository } from "../repository/usuario_repository.js";
 import {Contratar} from '../command/contratar.js';
 import {ServiciosContratados} from '../command/serviciosContratados.js';
+import { CancelarServicio } from '../command/cancelarServicio.js';
 
 export class UsuarioUseCase {
 
@@ -66,4 +67,8 @@ export class UsuarioUseCase {
     return servicio;
   }
   
+  async cancelarServicio(mail, id){
+    const servicio = await new CancelarServicio().cancelarServicio(mail, id);
+    return servicio;
+  }
 }

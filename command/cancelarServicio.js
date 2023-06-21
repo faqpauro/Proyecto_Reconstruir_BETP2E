@@ -1,23 +1,29 @@
+import { UsuarioRepository } from '../repository/usuario_repository.js';
+import { ServicioRepository } from '../repository/servicio_repository.js';
 export class CancelarServicio {
-    constructor() {
-      this.servicioRepo = new ServicioRepository();
-      this.usuarioRepo = new UsuarioRepository();
-    }
-  
-    async cancelarServicio(mail, id) {
-      const servicioArray = await this.servicioRepo.buscarServicio(id);
-      const servicio = servicioArray[0];
-      const usuario = await this.usuarioRepo.buscarUsuario(mail);
+  constructor() {
+    this.usuarioRepo = new UsuarioRepository();
+    this.servicioRepo = new ServicioRepository();
+  }
 
-      if (usuario.length !== 0) {
-        if (servicioArray.length !== 0) {
-          return await this.usuarioRepo.contratarServicio(usuario, servicio);
+  async cancelarServicio(mail, id) {
+    const usuario = await this.usuarioRepo.buscarUsuario(mail);
+
+
+    if (usuario.length !== 0) {
+      const serviciosUsuario = usuario[0].servicios;
+      if (serviciosUsuario.length !== 0) {
+        const servicioEncontrado = serviciosUsuario.find((e) => e._id === id);
+        if (servicioEncontrado) {
+          return await this.usuarioRepo.cancelarServicio(mail, id)
         } else {
-          console.log("Servicio Inexistente");
+          throw new Error("Servicio no encontrado")
         }
       } else {
-        console.log("Usuario Inexistente");
+        throw new Error("El usuario no posee servicios actualmente")
       }
+    } else {
+      throw new Error("El usuario no existe")
     }
-    
   }
+}

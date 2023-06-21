@@ -82,6 +82,19 @@ export class UsuarioDBStorage {
     return result
   }
 
+  async cancelarServicio(mail, id2) {
+
+    const result = await this.collection.updateOne(
+      { _id: mail }, // Filtro para encontrar el usuario por el correo
+      {
+        $pull: 
+        { servicios: {_id: id2} } 
+      } 
+    );
+
+    return result
+  }
+
 }
 
 /*METODOS DESARROLLADOS EN ESTA CLASE SON OBTENIDOS ESPECIALMENTE DE LA DOCUMENTACION

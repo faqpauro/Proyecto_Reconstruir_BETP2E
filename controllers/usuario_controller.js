@@ -69,4 +69,9 @@ export default class UsuarioController {
     return await this.usuarioUseCase.serviciosContratados(id);
   }
 
+  async cancelarServicio(req, res){
+    const { mail } = req.params;  // Id de Usuario
+    const { id } = req.body;  // Id de Servicio
+    await this.usuarioUseCase.cancelarServicio(mail, id);
+  }
 }

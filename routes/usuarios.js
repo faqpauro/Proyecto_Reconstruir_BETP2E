@@ -78,6 +78,16 @@ router.get('/carrito/:id', async function (req, res) {
   } catch (error) {
     res.status(500).send("" + error); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
   }
+});
+
+//Desarrollo de Metodo DELETE - Eliminar Servicios de Usuario
+router.delete('/carrito/:mail', async function (req, res) {
+  try {
+    await usuarioController.cancelarServicio(req, res);
+    res.status(200).send("El servicio se elimino correctamente"); // Enviar un código de estado 200 (OK) al cliente
+  } catch (error) {
+    res.status(500).send("" + error); // Enviar un código de estado 500 (Internal Server Error) al cliente en caso de error
+  }
 })
 
 

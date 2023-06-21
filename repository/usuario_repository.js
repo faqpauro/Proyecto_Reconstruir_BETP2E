@@ -46,8 +46,10 @@ agregarServicio(mail,servicio){
 //CAMBIOS
 async contratarServicio(usuario, servicio){
     return await this.storage.contratarServicio(usuario, servicio)
-    
+}
 
+async cancelarServicio(mail, id){
+    return await this.storage.cancelarServicio(mail, id)
 }
 
 }
