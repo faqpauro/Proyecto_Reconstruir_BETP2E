@@ -57,13 +57,13 @@ export default class UsuarioController {
     }
   }
 
-  //CAMBIO
+  
   async contratarServicio(req, res) {
     const { mail,id } = req.body;
     await this.usuarioUseCase.contratarServicio(mail, id);
   }
 
-  //CAMBIO
+  
   async serviciosContratados(req, res) {
     const { id } = req.params;
     return await this.usuarioUseCase.serviciosContratados(id);

@@ -5,17 +5,13 @@ import { UsuarioRepository } from '../repository/usuario_repository.js';
 // Definición de la clase Contratar
 export class Contratar {
   constructor() {
-    // Creación de instancias de los repositorios
     this.servicioRepo = new ServicioRepository();
     this.usuarioRepo = new UsuarioRepository();
   }
 
-    // Método para contratar un servicio
   async contratarServicio(mail, id) {
-    // Buscar el servicio en el repositorio
     const servicioArray = await this.servicioRepo.buscarServicio(id);
     const servicio = servicioArray[0];
-    // Buscar el usuario en el repositorio
     const usuario = await this.usuarioRepo.buscarUsuario(mail);
     
     // Verifica si el usuario existe
@@ -27,7 +23,7 @@ export class Contratar {
       if (servicioArray.length !== 0) {
         if (!servicioEncontrado) {
           // Contratar el servicio y guardar en el repositorio
-          return await this.usuarioRepo.contratarServicio(usuario, servicio);
+          return await this.usuarioRepo.guardarServicio(usuario, servicio);
         } else {
           throw Error("El servicio ya está contratado.")
         }

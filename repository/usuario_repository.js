@@ -44,13 +44,13 @@ agregarServicio(mail,servicio){
     return this.storage.actualizarTelefono(mail,telfNuevo)
 }*/
 
-//CAMBIOS
-async contratarServicio(usuario, servicio){
-    return await this.storage.contratarServicio(usuario, servicio)
+
+async guardarServicio(usuario, servicio){
+    return await this.storage.guardarServicio(usuario, servicio)
 }
 
-async cancelarServicio(mail, id){
-    return await this.storage.cancelarServicio(mail, id)
+async removerServicio(mail, id){
+    return await this.storage.removerServicio(mail, id)
 }
 
 }

@@ -55,7 +55,7 @@ export class UsuarioUseCase {
     }
   }
 
-  //CAMBIO
+  
   async contratarServicio(mail,id){
     const servicio = await new Contratar().contratarServicio(mail,id);
     return servicio;

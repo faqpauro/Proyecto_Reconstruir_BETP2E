@@ -68,7 +68,7 @@ export class UsuarioDBStorage {
     );
   }
   //CAMBIO
-  async contratarServicio(usuario, servicio) {
+  async guardarServicio(usuario, servicio) {
     const mailBuscado = usuario[0]._id
 
     const result = await this.collection.updateOne(
@@ -82,7 +82,7 @@ export class UsuarioDBStorage {
     return result
   }
 
-  async cancelarServicio(mail, id2) {
+  async removerServicio(mail, id2) {
 
     const result = await this.collection.updateOne(
       { _id: mail }, // Filtro para encontrar el usuario por el correo
